@@ -1,7 +1,6 @@
-export interface Ability2 {
-	name: string;
-	url: string;
-}
+import type { RemoteResource } from './remote_resource';
+
+export type Ability2 = RemoteResource;
 
 export interface Ability {
 	ability: Ability2;
@@ -9,30 +8,18 @@ export interface Ability {
 	slot: number;
 }
 
-export interface Form {
-	name: string;
-	url: string;
-}
+export type Form = RemoteResource;
 
-export interface Version {
-	name: string;
-	url: string;
-}
+export type Version = RemoteResource;
 
 export interface GameIndice {
 	game_index: number;
 	version: Version;
 }
 
-export interface Item {
-	name: string;
-	url: string;
-}
+export type Item = RemoteResource;
 
-export interface Version2 {
-	name: string;
-	url: string;
-}
+export type Version2 = RemoteResource;
 
 export interface VersionDetail {
 	rarity: number;
@@ -44,20 +31,11 @@ export interface HeldItem {
 	version_details: VersionDetail[];
 }
 
-export interface Move2 {
-	name: string;
-	url: string;
-}
+export type Move2 = RemoteResource;
 
-export interface MoveLearnMethod {
-	name: string;
-	url: string;
-}
+export type MoveLearnMethod = RemoteResource;
 
-export interface VersionGroup {
-	name: string;
-	url: string;
-}
+export type VersionGroup = RemoteResource;
 
 export interface VersionGroupDetail {
 	level_learned_at: number;
@@ -70,10 +48,7 @@ export interface Move {
 	version_group_details: VersionGroupDetail[];
 }
 
-export interface Species {
-	name: string;
-	url: string;
-}
+export type Species = RemoteResource;
 
 export interface DreamWorld {
 	front_default: string;
@@ -120,21 +95,14 @@ export interface Sprites {
 	versions: any;
 }
 
-export interface Stat2 {
-	name: string;
-	url: string;
-}
-
+export type Stat2 = RemoteResource;
 export interface Stat {
 	base_stat: number;
 	effort: number;
 	stat: Stat2;
 }
 
-export interface Type2 {
-	name: string;
-	url: string;
-}
+export type Type2 = RemoteResource;
 
 export interface Type {
 	slot: number;

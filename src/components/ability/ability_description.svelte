@@ -7,8 +7,7 @@
 	import Tag from '../common/tag.svelte';
 
 	export let ability: Ability2;
-	const color = new colorHash().hex(ability.name);
-
+	export let isHidden: boolean;
 	async function getAbility(abi: Ability2) {
 		const res = await fetch(abi.url);
 		const data = await res.json();
@@ -30,16 +29,29 @@
 	{#await promise}
 		<p>loading ...</p>
 	{:then data}
-		<h2>{ability.name}</h2>
+		<h3>
+			{ability.name}
+		</h3>
+		{#if isHidden}
+			<span>(hidden ability)</span>
+			<br />
+		{/if}
+
+		<br />
+
 		<p>{currentLocaleAbility(data)?.effect}</p>
+
+		<br />
 		<Tag color={new colorHash().hex(currentLocaleAbility(data)?.short_effect ?? '#dfdfdf')}>
 			{currentLocaleAbility(data)?.short_effect}
 		</Tag>
+	{:catch error}
+		<p>{error}</p>
 	{/await}
 </div>
 
 <style>
-	h2 {
+	h3 {
 		text-transform: capitalize;
 	}
 </style>
