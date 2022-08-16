@@ -20,19 +20,24 @@
 
 <div class="move">
 	<span class="move-name">
-		{index}.
-		<a href="#{move.move.name}" on:click|preventDefault={showMove}
-			>{move.move.name.replace('-', ' ')}</a
+		<a class="link" href="#{move.move.name}" on:click|preventDefault={showMove}>
+			{index}. {move.move.name.replace('-', ' ')}</a
 		>
 	</span>
 </div>
 
-<style>
+<style lang="scss">
+	/* because the directory of `theme.scss` is in `includePaths` */
+	@use 'static/css/theme.scss';
 	.move {
 		display: flex;
 		flex-direction: column;
 	}
 	.move-name {
 		text-transform: capitalize;
+	}
+	.link {
+		text-decoration: none;
+		color: theme.$main;
 	}
 </style>

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Modal from 'svelte-simple-modal';
 
-	import type { Ability2 } from 'src/models/pokemon';
+	import type { Ability2 } from '@models/pokemon';
 
 	import AbilityButton from './ability_button.svelte';
 

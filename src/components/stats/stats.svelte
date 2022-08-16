@@ -1,5 +1,7 @@
 <script lang="ts">
-	import type { Stat } from 'src/models/pokemon';
+	import type { Stat } from '@models/pokemon';
+	import { Label } from 'attractions';
+
 	export let stats: Stat[] = [];
 </script>
 
@@ -7,14 +9,16 @@
 	{#each stats as stat}
 		<li>
 			<div class="stat-box">
-				<span class="name">{stat.stat.name}:</span>
+				<div class="name">
+					<Label>{stat.stat.name}:</Label>
+				</div>
 
 				<div class="stat-percent">
 					<progress id="stats" value={stat.base_stat} max="255">
 						{stat.base_stat}
 					</progress>
 					&nbsp;
-					<span> {stat.base_stat}</span>
+					<Label>{stat.base_stat}</Label>
 				</div>
 			</div>
 		</li>

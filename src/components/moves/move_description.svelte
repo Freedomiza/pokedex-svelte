@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { FullMove } from 'src/models/full_move';
-	import type { Move2 } from 'src/models/pokemon';
-	import DataTable, { Body, Row, Cell } from '@smui/data-table';
+	import type { FullMove } from '@models/full_move';
+	import type { Move2 } from '@models/pokemon';
+	import { H3, Label } from 'attractions';
+
 	import { onMount } from 'svelte';
 	import { find } from 'lodash';
-	import Tag from '../common/tag.svelte';
+	import Tag from '@components/common/tag.svelte';
 	import colorHash from 'color-hash';
 
 	export let move: Move2;
-	let fullMove: FullMove | null;
 	onMount(async () => {
 		console.log(move);
 	});
@@ -35,51 +35,58 @@
 	{#await promise}
 		<p>loading ...</p>
 	{:then data}
-		<h3 class="move-name">{currentLocaleName(data)?.name}</h3>
+		<H3 class="move-name">{currentLocaleName(data)?.name}</H3>
 		{#each data.effect_entries as effect}
 			<span class="move-desc">
-				{effect.effect}
+				<Label small>{effect.effect}</Label>
 			</span>
 		{/each}
 
 		<br />
-		<DataTable table$aria-label="" class="table" style="width: 100%;">
-			<Body>
-				<Row>
-					<Cell><span class="cell cell-title"> Type</span></Cell>
-					<Cell>
-						<span class="cell cell-value">
-							<Tag color={new colorHash().hex(data.type.name)}>{data.type.name}</Tag>
-						</span>
-					</Cell>
-				</Row>
-				<Row>
-					<Cell><span class="cell cell-title">Damage Class</span></Cell>
-					<Cell><span class="cell cell-value">{data.damage_class.name}</span></Cell>
-				</Row>
-				<Row>
-					<Cell><span class="cell cell-title">Accuracy</span></Cell>
-					<Cell><span class="cell cell-value">{data.accuracy ?? 'N/A'}</span></Cell>
-				</Row>
-				<Row>
-					<Cell><span class="cell cell-title">Power</span></Cell>
-					<Cell><span class="cell cell-value">{data.power ?? 'N/A'}</span></Cell>
-				</Row>
-				<Row>
-					<Cell><span class="cell cell-title">PP</span></Cell>
-					<Cell><span class="cell cell-value">{data.pp ?? 'N/A'}</span></Cell>
-				</Row>
-			</Body>
-		</DataTable>
+
+		<div class="table" style="width: 100%;">
+			<div class="row">
+				<div class="cell"><span class="cell cell-title"><Label>Type</Label> </span></div>
+				<div class="cell">
+					<span class="cell cell-value">
+						<Tag color={new colorHash().hex(data.type.name)}>{data.type.name}</Tag>
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell"><span class="cell cell-title"><Label>Damage Class</Label></span></div>
+				<div class="cell"><span class="cell cell-value"> {data.damage_class.name}</span></div>
+			</div>
+			<div class="row">
+				<div class="cell"><span class="cell cell-title"><Label>Accuracy</Label></span></div>
+				<div class="cell"><span class="cell cell-value">{data.accuracy ?? 'N/A'}</span></div>
+			</div>
+			<div class="row">
+				<div class="cell"><span class="cell cell-title"><Label>Power</Label></span></div>
+				<div class="cell"><span class="cell cell-value">{data.power ?? 'N/A'}</span></div>
+			</div>
+			<div class="row">
+				<div class="cell"><span class="cell cell-title"><Label>PP</Label></span></div>
+				<div class="cell"><span class="cell cell-value">{data.pp ?? 'N/A'}</span></div>
+			</div>
+		</div>
 	{:catch error}
 		<p>{error}</p>
 	{/await}
 </div>
 
 <style>
-	.move-name {
-		text-transform: capitalize;
+	.table {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1em;
 	}
+	.row {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
 	.move-desc {
 		display: block;
 		font-size: 0.9em;

@@ -2,9 +2,10 @@
 	import { find } from 'lodash';
 	import colorHash from 'color-hash';
 
-	import type { Ability2 } from 'src/models/pokemon';
-	import type { FullAbility } from 'src/models/full_ability';
+	import type { Ability2 } from '@models/pokemon';
+	import type { FullAbility } from '@models/full_ability';
 	import Tag from '../common/tag.svelte';
+	import { H3, Label } from 'attractions';
 
 	export let ability: Ability2;
 	export let isHidden: boolean;
@@ -27,19 +28,19 @@
 
 <div>
 	{#await promise}
-		<p>loading ...</p>
+		<span>loading ...</span>
 	{:then data}
-		<h3>
-			{ability.name}
-		</h3>
+		<H3>
+			<span class="name"> {ability.name}</span>
+		</H3>
 		{#if isHidden}
-			<span>(hidden ability)</span>
+			<Label>(hidden ability)</Label>
 			<br />
 		{/if}
 
 		<br />
 
-		<p>{currentLocaleAbility(data)?.effect}</p>
+		<p><Label small>{currentLocaleAbility(data)?.effect}</Label></p>
 
 		<br />
 		<Tag color={new colorHash().hex(currentLocaleAbility(data)?.short_effect ?? '#dfdfdf')}>
@@ -51,7 +52,7 @@
 </div>
 
 <style>
-	h3 {
+	.name {
 		text-transform: capitalize;
 	}
 </style>

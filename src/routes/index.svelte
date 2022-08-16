@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PokemonView from '../components/pokemon_view/pokemon_view.svelte';
-	import Button, { Label } from '@smui/button';
+	import { Button, Headline, TextField } from 'attractions';
+	import PokemonView from '@components/pokemon_view/pokemon_view.svelte';
+	import { DummyPokemon, type Pokemon } from '@models/pokemon';
 
-	import { DummyPokemon, type Pokemon } from '../models/pokemon';
 	let name = 'ditto';
 	let pokemon: Pokemon | null = DummyPokemon;
 
@@ -21,14 +21,12 @@
 </script>
 
 <div class="container">
-	<h1>Search Pokemon</h1>
+	<Headline>Search Pokemon</Headline>
 
 	<form name="search" on:submit|preventDefault={searchPokemon}>
-		<input type="text" placeholder="Search..." bind:value={name} />
+		<TextField placeholder="Search..." bind:value={name} />
 
-		<Button type="submit" name="Search" value="Search" variant="raised"
-			><Label>Search</Label></Button
-		>
+		<Button small type="submit" value="Search" filled rectangle>Search</Button>
 	</form>
 	{#if pokemon != null}
 		<PokemonView {pokemon} />
@@ -45,8 +43,5 @@
 		width: 100%;
 		max-width: 300px;
 		padding-bottom: 20px;
-	}
-	input[type='text'] {
-		padding: 4px 12px;
 	}
 </style>
